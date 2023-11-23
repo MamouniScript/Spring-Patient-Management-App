@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1.html"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Nouveau Patient</title>
+</head>
+<body>
+  <div layout:fragment="content">
+      <div class="row mt-3">
+          <div class="col-md-6 offset-3">
+              <div class="card">
+                  <div class="card-header">Nouveau patient</div>
+                  <div class="card-body">
+                      <div class="p-3">
+                          <form th:action="@{/savePatient}" method="post" class="max-w-md mx-auto">
+                              <div class="mb-4">
+                                  <label class="block text-gray-700 text-sm font-bold mb-2">ID:</label>
+                                  <span class="text-gray-900" th:text="${patient.id}"></span>
+                                  <input type="hidden" name="id" class="form-input" th:value="${patient.id}">
+                              </div>
+                              <div class="mb-4">
+                                  <label class="block text-gray-700 text-sm font-bold mb-2">Name:</label>
+                                  <input type="text" name="nom" class="form-input" th:value="${patient.nom}">
+                                  <span class="text-red-500" th:errors="${patient.nom}"></span>
+                              </div>
+                              <div class="mb-4">
+                                  <label class="block text-gray-700 text-sm font-bold mb-2">Date Naissance:</label>
+                                  <input type="date" name="dateNaissance" class="form-input" th:value="${patient.dateNaissance}">
+                                  <span class="text-red-500" th:errors="${patient.dateNaissance}"></span>
+                              </div>
+                              <div class="mb-4">
+                                  <label class="block text-gray-700 text-sm font-bold mb-2">Malade:</label>
+                                  <input type="checkbox" name="malade" class="form-checkbox" th:checked="${patient.malade}">
+                                  <span class="text-red-500" th:errors="${patient.malade}"></span>
+                              </div>
+                              <div class="mb-4">
+                                  <label class="block text-gray-700 text-sm font-bold mb-2">Score:</label>
+                                  <input type="text" name="score" class="form-input" th:value="${patient.score}">
+                                  <span class="text-red-500" th:errors="${patient.score}"></span>
+                              </div>
+                              <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-green active:bg-green-800" type="submit">Update</button>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</body>
+</html>

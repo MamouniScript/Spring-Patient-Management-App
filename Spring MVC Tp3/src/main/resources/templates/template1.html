@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="/webjars/jquery/3.6.4/jquery.min.js"></script>
+</head>
+
+<body class="bg-gray-100">
+<nav class="bg-gray-800 p-4">
+  <div class="container mx-auto flex items-center justify-between">
+    <a class="text-white text-lg font-semibold" href="#">Navbar</a>
+    <div class="hidden lg:flex flex-grow items-center" id="navbarSupportedContent">
+      <ul class="flex flex-col lg:flex-row list-none lg:ml-auto">
+        <li class="lg:mx-2">
+          <a class="text-white" th:href="@{/index}">List</a>
+        </li>
+        <li class="lg:mx-2">
+          <a class="text-white" th:href="@{/formPatients}">New</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div layout:fragment="content">
+  <!-- Your content goes here -->
+</div>
+</body>
+
+</html>

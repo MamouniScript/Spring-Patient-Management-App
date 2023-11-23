@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="template1.html"
+>
+<head>
+    <meta charset="UTF-8">
+    <title>Patients</title>
+</head>
+<body class="bg-gray-100">
+<div layout:fragment="content" class="p-3">
+    <div class="card">
+        <div class="card-header">Liste Patients</div>
+        <div class="card-body">
+            <div class="flex items-center">
+                <form method="get" th:action="@{index}" class="flex items-center">
+                    <label for="keyword" class="mr-2 text-gray-600">Search :</label>
+                    <input type="text" name="keyword" id="keyword" th:value="${keyword}" class="border border-gray-300 py-2 px-4 rounded focus:outline-none focus:shadow-outline-blue">
+                    <button type="submit" class="ml-2 py-2 px-4 bg-blue-500 text-white rounded focus:outline-none focus:shadow-outline-blue hover:bg-blue-600">
+                        <i class="bi bi-search"></i> search
+                    </button>
+                </form>
+
+                <a class="py-2 px-4 bg-green-500 text-white rounded focus:outline-none focus:shadow-outline-green hover:bg-green-700 ml-2"
+                   th:href="@{/formPatients}">
+                    New
+                </a>
+            </div>
+
+
+            <table class="min-w-full bg-white border border-gray-300">
+                <thead class="bg-gray-200">
+                <tr>
+                    <th class="py-2 px-4 border-b text-left">ID</th>
+                    <th class="py-2 px-4 border-b text-left">Nom</th>
+                    <th class="py-2 px-4 border-b text-left">Date</th>
+                    <th class="py-2 px-4 border-b text-left">Malade</th>
+                    <th class="py-2 px-4 border-b text-left">Score</th>
+                    <th class="py-2 px-4 border-b text-left">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="p : ${listPatients}" class="hover:bg-gray-100">
+                    <td class="py-2 px-4 border-b" th:text="${p.id}"></td>
+                    <td class="py-2 px-4 border-b" th:text="${p.nom}"></td>
+                    <td class="py-2 px-4 border-b" th:text="${p.dateNaissance}"></td>
+                    <td class="py-2 px-4 border-b" th:text="${p.malade}"></td>
+                    <td class="py-2 px-4 border-b" th:text="${p.score}"></td>
+                    <td class="py-2 px-4 border-b">
+                        <a onclick="javascript:return confirm('Etes vous sure?')"
+                           th:href="@{delete(id=${p.id}, keyword=${keyword}, page=${currentPage})}"
+                           class="inline-block bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-red active:bg-red-800">
+                            Delete
+                        </a>
+                        <a class="inline-block bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline-green active:bg-green-800"
+                           th:href="@{/editPatient(id=${p.id})}">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <ul class="flex space-x-2">
+                <li th:each="v, item : ${pages}">
+                    <a th:href="@{/index(page=${item.index}, keyword=${keyword})}"
+                       class="py-2 px-4 border border-gray-300 rounded focus:outline-none focus:shadow-outline-blue transition duration-300 hover:bg-gray-100 ms-1"
+                       th:class="${currentPage == item.index ? 'bg-blue-500 text-white' : 'bg-white text-blue-500'}">
+                        <!-- Adjust the styling based on your preference -->
+                        <span th:text="${1 + item.index}"></span>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>
